@@ -20,6 +20,8 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('courseID')->first();
             $table->year('courseYear')->default(date("Y"));
+            $table->string('coordinatorID')->nullable();
+            $table->foreign('coordinatorID')->references('coordinatorID')->on('coordinator')->onDelete('cascade');
             $table->timestamps();
         });
     }
