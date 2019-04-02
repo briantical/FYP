@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentsTable extends Migration
+class CreatePanelistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('student', function (Blueprint $table) {
+        Schema::create('panelist', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
@@ -24,17 +24,19 @@ class CreateStudentsTable extends Migration
             $table->string('password');
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
-            $table->string('activation_token'); 
-            $table->string('userID')->unique();                              
-            $table->string('studentNumber')->unique();
-            $table->string('registrationNumber');
-            $table->string('courseID');
-            $table->foreign('courseID')->references('courseID')->on('course')->onDelete('cascade');
-            $table->string('groupID')->nullable();
-            $table->foreign('groupID')->references('groupID')->on('group')->onDelete('cascade');
+            $table->string('activation_token');
+            $table->string('userID')->unique();             
+            $table->string('lecturerID');
+            $table->string('lecturerDescription');
+            $table->string('panelistID');                               
+            $table->string('deptID');
+            $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
+            $table->boolean('isCoordinator')->default(false);
+            $table->boolean('isSupervisor')->default(false);
+            $table->boolean('isPanelist')->default(false);            
+            $table->rememberToken();            
+            $table->softDeletes();            
             $table->timestamps();
-            $table->softDeletes();
-            $table->rememberToken(); 
         });
     }
 
@@ -45,6 +47,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student');
+        Schema::dropIfExists('panelist');
     }
 }
