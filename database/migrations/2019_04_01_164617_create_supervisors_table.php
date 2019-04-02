@@ -26,9 +26,9 @@ class CreateSupervisorsTable extends Migration
             $table->boolean('active')->default(false);
             $table->string('activation_token'); 
             $table->string('userID')->unique();           
-            $table->string('lecturerID');
+            $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
-            $table->string('supervisorID');                               
+            $table->string('supervisorID')->unique();                               
             $table->string('deptID');
             $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
             $table->boolean('isCoordinator')->default(false);
