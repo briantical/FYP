@@ -37,4 +37,20 @@ class Student extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    /**
+     * Get the group that has the student.
+     */
+    public function group()
+    {
+        return $this->belongsTo('App\Group','groupID');
+    }
+
+    /**
+     * Get the course that the student belongs to
+     */
+    public function course()
+    {
+        return $this->belongsTo('App\Course','courseID');
+    }
 }

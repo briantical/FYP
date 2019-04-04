@@ -14,4 +14,28 @@ class Project extends Model
     protected $fillable = [
        'projectID','projectName','projectDescription','groupID','supervisorID','projectStartDate','projectEndDate','isComplete','isStarted'
     ];
+
+    /**
+     * Get the group that owns the project.
+     */
+    public function group()
+    {
+        return $this->belongsTo('App\Group', 'groupID');
+    }
+
+    /**
+     * Get the supervisor that supervisors this project.
+     */
+    public function supervisor()
+    {
+        return $this->belongsTo('App\Supervisor','supervisorID');
+    }
+
+    /**
+     * The tasks that belong to the project.
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+    }
 }

@@ -14,4 +14,28 @@ class Course extends Model
     protected $fillable = [
        'courseID','courseYear','coordinatorID'
     ];
+
+    /**
+     * Get the group record associated with the course.
+     */
+    public function groups()
+    {
+        return $this->hasMany('App\Group','courseID');
+    }
+
+    /**
+     * Get the coordinator of course.
+     */
+    public function coordinator()
+    {
+        return $this->belongsTo('App\Coordinator', 'coordinatorID');
+    }
+
+    /**
+     * Get the students records for the course.
+     */
+    public function students()
+    {
+        return $this->hasMany('App\Student', 'courseID');
+    }
 }

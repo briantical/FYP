@@ -35,4 +35,12 @@ class Coordinator extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    /**
+     * Get the course record associated with the coordinator.
+     */
+    public function course()
+    {
+        return $this->hasOne('App\Course','coordinatorID');
+    }
 }

@@ -35,4 +35,20 @@ class Supervisor extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    /**
+     * Get the projects of the supervisor
+     */
+    public function projects()
+    {
+        return $this->hasMany('App\Project','supervisorID');
+    }
+
+    /**
+     * Get the tasks of the supervisor
+     */
+    public function tasks()
+    {
+        return $this->hasMany('App\Task','supervisorID');
+    }
 }
