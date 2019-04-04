@@ -2,12 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Panel extends Model
+class Panel extends Pivot
 {
     protected $table = 'panel';
     protected $primaryKey ="panelID";
-    public $incrementing = false;
+    public $incrementing = true;
     protected $keyType = "string";
+
+    protected $fillable = [
+       'id','projectID','panelistID'
+    ];
 }

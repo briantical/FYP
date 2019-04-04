@@ -10,4 +10,8 @@ class Course extends Model
     protected $primaryKey ="courseID";
     public $incrementing = false;
     protected $keyType = "string";
+
+    protected $fillable = [
+       'courseID','courseYear','coordinatorID'
+    ];
 }
