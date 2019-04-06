@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button , Form } from 'react-bootstrap';
 import './authentication.css'
 
-import muk from '../public/images/muk.png'
+//import muk from '../public/images/muk.png'
 
 export default class Login extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class Login extends Component {
                         <div className="collegeName">COLLEGE OF COMPUTING AND INFORMATION SCIENCES</div>
                     </div>
                     <div className="logoContainer">
-                        <img src={muk} alt="SCIT Logo" width="50px" height="50px"/> 
+                        <img src="{{ asset('images/muk.png') }}" alt="SCIT Logo" width="50px" height="50px"/> 
                     </div>                    
                 </div>
               <Form className="form">

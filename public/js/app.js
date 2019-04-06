@@ -72571,7 +72571,7 @@ module.exports = exports['default'];
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79244,6 +79244,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 /* harmony import */ var _authentication_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authentication.css */ "./resources/js/src/components/authentication/authentication.css");
 /* harmony import */ var _authentication_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_authentication_css__WEBPACK_IMPORTED_MODULE_2__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../public/images/muk.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79264,7 +79265,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- //import '../../assets/muk.png'
+
+
 
 var Login =
 /*#__PURE__*/
@@ -79293,7 +79295,7 @@ function (_Component) {
       }, "COLLEGE OF COMPUTING AND INFORMATION SCIENCES")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "logoContainer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "../../assets/muk.png",
+        src: "{{ asset('images/muk.png') }}",
         alt: "SCIT Logo",
         width: "50px",
         height: "50px"

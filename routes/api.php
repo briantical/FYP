@@ -41,3 +41,9 @@ Route::group([
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
 });
+
+Route::group([    
+    'prefix' => 'dept',     
+], function () {        
+    Route::get('/', 'DepartmentController@index');    
+});

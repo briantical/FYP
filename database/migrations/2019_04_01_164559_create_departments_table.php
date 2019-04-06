@@ -19,9 +19,13 @@ class CreateDepartmentsTable extends Migration
             $table->collation = 'utf8_unicode_ci';            
             $table->string('deptID')->unique();
             $table->string('deptName');
-            $table->string('deptDescription');
-            $table->timestamps();
+            $table->string('deptDescription');            
         });
+
+        Artisan::call( 'db:seed', [
+            '--class' => 'DepartmentTableSeeder',
+            '--force' => true ]
+         );
     }
 
     /**
@@ -32,5 +36,9 @@ class CreateDepartmentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('department');
+        Artisan::call( 'db:seed', [
+            '--class' => 'DepartmentTableSeeder',
+            '--force' => true ]
+        );
     }
 }
