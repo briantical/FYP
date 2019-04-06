@@ -17,10 +17,10 @@ class CreateProjectsTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';            
-            $table->string('projectID')->unique();
+            $table->string('projectID')->primary();
             $table->string('projectName');
             $table->string('projectDescription');
-            $table->string('groupID');            
+            $table->string('groupID')->unique();            
             $table->string('supervisorID');           
             $table->date('projectStartDate')->default(date('Y-m-d H:i:s'));
             $table->date('projectEndDate');            

@@ -17,7 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';            
-            $table->string('deptID')->unique();
+            $table->string('deptID')->primary();
             $table->string('deptName');
             $table->string('deptDescription');            
         });

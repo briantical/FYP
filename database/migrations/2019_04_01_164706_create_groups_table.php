@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';            
-            $table->string('groupID')->unique();
+            $table->string('groupID')->primary();
             $table->string('groupName');
             $table->string('courseID');           
             $table->date('createdOn')->default(date('Y-m-d H:i:s'));

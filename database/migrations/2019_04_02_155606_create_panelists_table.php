@@ -25,11 +25,11 @@ class CreatePanelistsTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
             $table->string('activation_token');
-            $table->string('userID');             
-            $table->string('lecturerID');
+            $table->string('userID')->unique();             
+            $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
-            $table->string('panelistID')->unique();                               
-            $table->string('deptID')->nullable();            
+            $table->string('panelistID')->primary();                               
+            $table->string('deptID');            
             $table->boolean('isCoordinator')->default(false);
             $table->boolean('isSupervisor')->default(false);
             $table->boolean('isPanelist')->default(false);            

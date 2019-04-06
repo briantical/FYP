@@ -24,9 +24,9 @@ class CreateStudentsTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
             $table->string('activation_token'); 
-            $table->string('userID');                              
-            $table->string('studentNumber')->unique();
-            $table->string('registrationNumber');
+            $table->string('userID')->unique();                              
+            $table->string('studentNumber')->primary();
+            $table->string('registrationNumber')->unique();
             $table->string('courseID');           
             $table->string('groupID');            
             $table->timestamps();

@@ -17,7 +17,7 @@ class CreateCoursesTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';            
-            $table->string('courseID')->unique();
+            $table->string('courseID')->primary();
             $table->year('courseYear')->default(date("Y"));
             $table->string('coordinatorID')->nullabe();                        
         });

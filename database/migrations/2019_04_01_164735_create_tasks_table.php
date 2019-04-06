@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';            
-            $table->string('taskID')->unique();
+            $table->string('taskID')->primary();
             $table->string('taskName');
             $table->string('taskDescription');            
             $table->string('supervisorID');                            
