@@ -36,6 +36,16 @@ class Project extends Model
      */
     public function tasks()
     {
-        return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+        //return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+        return $this->belongsToMany('App\Task')->using('App\Assignment');
+    }
+
+    /**
+     * The panelists for the project.
+     */
+    public function panelists()
+    {
+        //return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+        return $this->belongsToMany('App\Panelist')->using('App\Panel');
     }
 }

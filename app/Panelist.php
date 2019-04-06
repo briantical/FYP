@@ -35,4 +35,21 @@ class Panelist extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    /**
+     * Get the department that the panelist belongs to
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Department','deptID');
+    }
+
+    /**
+     * The projects handled by the panelist.
+     */
+    public function projects()
+    {
+        //return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+        return $this->belongsToMany('App\Project')->using('App\Panel');
+    }
 }

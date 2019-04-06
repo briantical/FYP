@@ -16,21 +16,19 @@ class CreateCoordinatorsTable extends Migration
         Schema::create('coordinator', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id');            
+            $table->collation = 'utf8_unicode_ci';                      
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
             $table->string('activation_token'); 
-            $table->string('userID')->unique();            
-            $table->string('lecturerID')->unique();
+            $table->string('userID');            
+            $table->string('lecturerID');
             $table->string('lecturerDescription');
             $table->string('coordinatorID')->unique();                               
-            $table->string('deptID');
-            $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
+            $table->string('deptID')->nullable();            
             $table->boolean('isCoordinator')->default(false);
             $table->boolean('isSupervisor')->default(false);
             $table->boolean('isPanelist')->default(false);            

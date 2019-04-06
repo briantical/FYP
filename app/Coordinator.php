@@ -43,4 +43,12 @@ class Coordinator extends Authenticatable
     {
         return $this->hasOne('App\Course','coordinatorID');
     }
+
+    /**
+     * Get the department that the coordinator belongs to
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Department','deptID');
+    }
 }

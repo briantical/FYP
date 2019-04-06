@@ -16,13 +16,11 @@ class CreateTasksTable extends Migration
         Schema::create('task', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id');
-            $table->string('taskID')->first();
+            $table->collation = 'utf8_unicode_ci';            
+            $table->string('taskID')->unique();
             $table->string('taskName');
             $table->string('taskDescription');            
-            $table->string('supervisorID')->nullable();
-            $table->foreign('supervisorID')->references('supervisorID')->on('supervisor')->onDelete('cascade');                    
+            $table->string('supervisorID');                            
             $table->date('taskStartDate')->default(date('Y-m-d H:i:s'));
             $table->date('taskEndDate');
             $table->boolean('isComplete')->default(false);

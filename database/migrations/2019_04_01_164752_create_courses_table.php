@@ -16,12 +16,10 @@ class CreateCoursesTable extends Migration
         Schema::create('course', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id');
-            $table->string('courseID')->first();
+            $table->collation = 'utf8_unicode_ci';            
+            $table->string('courseID')->unique();
             $table->year('courseYear')->default(date("Y"));
-            $table->string('coordinatorID')->nullable();
-            $table->foreign('coordinatorID')->references('coordinatorID')->on('coordinator')->onDelete('cascade');
+            $table->string('coordinatorID');            
             $table->timestamps();
         });
     }

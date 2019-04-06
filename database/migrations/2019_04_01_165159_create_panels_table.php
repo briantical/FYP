@@ -17,11 +17,9 @@ class CreatePanelsTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id');        
-            $table->string('projectID');
-            $table->foreign('projectID')->references('projectID')->on('project')->onDelete('cascade');
-            $table->string('panelistID');
-            $table->foreign('panelistID')->references('panelistID')->on('panelist')->onDelete('cascade');
+            $table->bigIncrements('id')->unsigned();        
+            $table->string('projectID');            
+            $table->string('panelistID');            
             $table->timestamps();
         });
     }

@@ -51,4 +51,12 @@ class Supervisor extends Authenticatable
     {
         return $this->hasMany('App\Task','supervisorID');
     }
+
+    /**
+     * Get the department that the supervisor belongs to
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Department','deptID');
+    }
 }
