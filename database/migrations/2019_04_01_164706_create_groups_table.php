@@ -20,8 +20,7 @@ class CreateGroupsTable extends Migration
             $table->string('groupID')->primary();
             $table->string('groupName');
             $table->string('courseID');           
-            $table->date('createdOn')->default(date('Y-m-d H:i:s'));
-            $table->timestamps();
+            $table->date('createdOn')->default(date('Y-m-d H:i:s'));            
         });
     }
 

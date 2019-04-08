@@ -10,6 +10,7 @@ class Department extends Model
     protected $primaryKey ="deptID";
     public $incrementing = false;
     protected $keyType = "string";
+    public $timestamps = false;
 
     protected $fillable = [
        'deptID','deptName','deptDescription'

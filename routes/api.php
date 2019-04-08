@@ -45,5 +45,35 @@ Route::group([
 Route::group([    
     'prefix' => 'dept',     
 ], function () {        
-    Route::get('/', 'DepartmentController@index');    
+    Route::get('/', 'DepartmentController@index');
+    Route::post('/', 'DepartmentController@store');
+    Route::get('/{deptID}', 'DepartmentController@show');    
+    Route::delete('/{deptID}', 'DepartmentController@destroy');
+    Route::get('/supervisors/{deptID}', 'DepartmentController@getDepartmentSupervisors');
+    Route::get('/coordinators/{deptID}', 'DepartmentController@getDepartmentCoordinators');
+    Route::get('/panelists/{deptID}', 'DepartmentController@getDepartmentPanelists');
+});
+
+Route::group([    
+    'prefix' => 'course',     
+], function () {        
+    Route::get('/', 'CourseController@index');
+    Route::post('/', 'CourseController@store');
+    Route::get('/{courseID}', 'CourseController@show');    
+    Route::delete('/{courseID}', 'CourseController@destroy');
+    Route::get('/coordinator/{courseID}', 'CourseController@getCourseCoordinator');
+    Route::get('/groups/{courseID}', 'CourseController@getCourseGroups');
+    Route::get('/students/{courseID}', 'CourseController@getCourseStudents'); 
+});
+
+Route::group([    
+    'prefix' => 'group',     
+], function () {        
+    Route::get('/', 'GroupController@index');
+    Route::post('/', 'GroupController@store');
+    Route::get('/{groupID}', 'GroupController@show');    
+    Route::delete('/{groupID}', 'GroupController@destroy');
+    Route::get('/course/{groupID}', 'GroupController@getCourseCourse');
+    Route::get('/project/{groupID}', 'GroupController@getGroupProject');
+    Route::get('/students/{groupID}', 'GroupController@getGroupStudents'); 
 });

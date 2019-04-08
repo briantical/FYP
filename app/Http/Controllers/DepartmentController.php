@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -39,7 +40,19 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+          'deptID'=>'required',
+          'deptName' => 'required',
+          'deptDescription' => 'required',
+        ]);
+
+        $project = Department::create([
+          'deptID'=>$validatedData['deptID'],
+          'deptName' => $validatedData['deptName'],
+          'deptDescription' => $validatedData['deptDescription'],
+        ]);
+
+        return response()->json(['message'=>'Department created!']);
     }
 
     /**
@@ -50,7 +63,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $department = Department::find($id);
+        return $department->toJson();
     }
 
     /**
@@ -73,7 +87,13 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $department = Department::find($id);
+        $department->deptID = $request->get('deptID');
+        $department->deptName = $request->get('deptName');
+        $department->deptDescription = $request->get('deptDescription');
+        $department->save();
+
+        return response()->json(['message'=>'Successfully Updated Department']);
     }
 
     /**
@@ -84,6 +104,27 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $department->delete();
+
+        return response()->json(['message'=>'Successfully Deleted department']);
+    }
+
+    public function getDepartmentSupervisors($id)
+    {        
+        $departments = Department::find($id)->supervisors();
+        return response()->json(['message'=>'Successfully obtained supervisors','Supervisors'=> $departments]);        
+    }
+
+    public function getDepartmentCoordinators($id)
+    {        
+        $departments = Department::find($id)->coordinators();
+        return response()->json(['message'=>'Successfully obtained coordinators','Coordinators'=> $departments]);        
+    }
+
+    public function getDepartmentPanelists($id)
+    {        
+        $departments = Department::find($id)->panelists();
+        return response()->json(['message'=>'Successfully obtained panelists','Panelists'=> $departments]);        
     }
 }
