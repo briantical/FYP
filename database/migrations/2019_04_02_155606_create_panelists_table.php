@@ -16,8 +16,7 @@ class CreatePanelistsTable extends Migration
         Schema::create('panelist', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            //$table->bigIncrements('id');            
+            $table->collation = 'utf8_unicode_ci';                    
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -25,7 +24,7 @@ class CreatePanelistsTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
             $table->string('activation_token');
-            $table->string('userID')->unique();             
+            $table->unsignedInteger('userID');            
             $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
             $table->string('panelistID')->primary();                               

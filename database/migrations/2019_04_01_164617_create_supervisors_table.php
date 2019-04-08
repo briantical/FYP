@@ -24,7 +24,7 @@ class CreateSupervisorsTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->boolean('active')->default(false);
             $table->string('activation_token'); 
-            $table->string('userID')->unique();           
+            $table->unsignedInteger('userID');           
             $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
             $table->string('supervisorID')->primary();                               

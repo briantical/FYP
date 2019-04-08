@@ -15,10 +15,12 @@ class CreateForeignersTable extends Migration
     {
         Schema::table('supervisor', function(Blueprint $table) {
             $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('coordinator', function(Blueprint $table) {
             $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('project', function(Blueprint $table) {
@@ -41,6 +43,7 @@ class CreateForeignersTable extends Migration
         Schema::table('student', function(Blueprint $table) {
             $table->foreign('courseID')->references('courseID')->on('course')->onDelete('cascade');
             $table->foreign('groupID')->references('groupID')->on('group')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('panel', function(Blueprint $table) {
@@ -50,6 +53,7 @@ class CreateForeignersTable extends Migration
 
         Schema::table('panelist', function(Blueprint $table) {
             $table->foreign('deptID')->references('deptID')->on('department')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('assignment', function(Blueprint $table) {
