@@ -46,15 +46,12 @@ class CoordinatorController extends Controller
            'lectureID'=> 'required', 
            'lectureDescription'=> 'required', 
            'coordinatorID'=> 'required', 
-           'deptID'=> 'required', 
-           'isCoordinator'=> 'required',
-           'isSupervisor'=> 'required',
-           'isPanelist'=> 'required',                    
+           'deptID'=> 'required',                           
         ]);
 
         $user = User::find($request->get($validatedData['userID']));
 
-        $project = Course::create([
+        $coordinator = Coordinator::create([
           'name' => $user->name,
            'email'=> $user->email, 
            'password' => $user->password, 
@@ -66,14 +63,14 @@ class CoordinatorController extends Controller
            'lectureDescription'=> $validatedData['lectureDescription'], 
            'coordinatorID'=> $validatedData['coordinatorID'], 
            'deptID'=> $validatedData['deptID'], 
-           'isCoordinator'=> $validatedData['isCoordinator'],
-           'isSupervisor'=> $validatedData['isSupervisor'],
-           'isPanelist'=> $validatedData['isPanelist'],
+           'isCoordinator'=> true,
+           'isSupervisor'=> false,
+           'isPanelist'=> false,
            'remember_token' =>$user->remember_token,
            'email_verified_at' => $user->email_verified_at
         ]);
 
-        return response()->json(['message'=>'Coordinator created!']);
+        return response()->json(['message'=>'Coordinator created!','Coordinator'=>$coordinator]);
     }
 
     /**
@@ -84,7 +81,7 @@ class CoordinatorController extends Controller
      */
     public function show($id)
     {
-         $coordinator = Coordinator::find($id);
+        $coordinator = Coordinator::find($id);
         return $coordinator->toJson();
     }
 
@@ -112,14 +109,11 @@ class CoordinatorController extends Controller
            'userID'=> 'required'         ,
            'lectureID'=> 'required', 
            'lectureDescription'=> 'required',            
-           'deptID'=> 'required', 
-           'isCoordinator'=> 'required',
-           'isSupervisor'=> 'required',
-           'isPanelist'=> 'required',                    
+           'deptID'=> 'required',                                   
         ]);
 
         $coordinator = Coordinator::find($id);
-        $user = User::find($request->get('userID'));
+        $user = User::find($request->get($validatedData['userID']));
            $coordinator->name => $user->name,
            $coordinator->email=> $user->email, 
            $coordinator->password => $user->password, 
@@ -131,9 +125,9 @@ class CoordinatorController extends Controller
            $coordinator->lectureDescription=> $validatedData['lectureDescription'], 
            $coordinator->coordinatorID=> $id, 
            $coordinator->deptID=> $validatedData['deptID'], 
-           $coordinator->isCoordinator=> $validatedData['isCoordinator'],
-           $coordinator->isSupervisor=> $validatedData['isSupervisor'],
-           $coordinator->isPanelist=> $validatedData['isPanelist'],
+           $coordinator->isCoordinator=> true,
+           $coordinator->isSupervisor=> false,
+           $coordinator->isPanelist=> false,
            $coordinator->remember_token =>$user->remember_token,
            $coordinator->email_verified_at=> $user->email_verified_at
         $coordinator->save();
@@ -153,5 +147,12 @@ class CoordinatorController extends Controller
         $coordinator->delete();
 
         return response()->json(['message'=>'Successfully deleted Coordinator']);
+    }
+
+    public function getCourseCoordinated($id)
+    {
+        $course = Coordinator::find($id)->course();
+       
+        return response()->json(['message'=>'Successfully obtained Coordinator course', 'Course' =>$course]);
     }
 }

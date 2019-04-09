@@ -53,4 +53,9 @@ class Student extends Authenticatable
     {
         return $this->belongsTo('App\Course','courseID');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'userID');
+    }
 }

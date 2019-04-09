@@ -59,4 +59,9 @@ class Supervisor extends Authenticatable
     {
         return $this->belongsTo('App\Department','deptID');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'userID');
+    }
 }

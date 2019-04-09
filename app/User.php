@@ -32,4 +32,24 @@ class User extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    public function student()
+    {
+        return $this->hasOne('App\Student','userID');
+    }
+
+    public function supervisor()
+    {
+        return $this->hasOne('App\Supervisor','userID');
+    }
+
+    public function coordinator()
+    {
+        return $this->hasOne('App\Coordinator','userID');
+    }
+
+    public function panelist()
+    {
+        return $this->hasOne('App\Panelist','userID');
+    }
 }

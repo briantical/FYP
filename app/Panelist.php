@@ -48,8 +48,12 @@ class Panelist extends Authenticatable
      * The projects handled by the panelist.
      */
     public function projects()
-    {
-        //return $this->belongsToMany('App\Task','assignment','projectID','taskID');
+    {        
         return $this->belongsToMany('App\Project')->using('App\Panel');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'userID');
     }
 }
