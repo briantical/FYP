@@ -28,7 +28,7 @@ class CreateCoordinatorsTable extends Migration
             $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
             $table->string('coordinatorID')->primary();                               
-            $table->string('deptID');            
+            $table->string('deptID')->nullable();            
             $table->boolean('isCoordinator')->default(false);
             $table->boolean('isSupervisor')->default(false);
             $table->boolean('isPanelist')->default(false);            

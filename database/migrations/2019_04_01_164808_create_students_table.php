@@ -27,8 +27,8 @@ class CreateStudentsTable extends Migration
             $table->integer('userID')->unsigned()->nullable();                              
             $table->string('studentNumber')->primary();
             $table->string('registrationNumber')->unique();
-            $table->string('courseID');           
-            $table->string('groupID');            
+            $table->string('courseID')->nullable();           
+            $table->string('groupID')->nullable();            
             $table->timestamps();
             $table->softDeletes();
             $table->rememberToken(); 
