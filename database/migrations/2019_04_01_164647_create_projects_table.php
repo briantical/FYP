@@ -20,8 +20,8 @@ class CreateProjectsTable extends Migration
             $table->string('projectID')->primary();
             $table->string('projectName');
             $table->string('projectDescription');
-            $table->string('groupID')->unique()->nullable();            
-            $table->string('supervisorID')->nullable();           
+            $table->string('groupID')->unique()->nullable()->default(null);            
+            $table->string('supervisorID')->nullable()->default(null);           
             $table->date('projectStartDate')->default(date('Y-m-d H:i:s'));
             $table->date('projectEndDate');            
             $table->boolean('isComplete')->default(false);

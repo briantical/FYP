@@ -19,7 +19,7 @@ class CreateGroupsTable extends Migration
             $table->collation = 'utf8_unicode_ci';            
             $table->string('groupID')->primary();
             $table->string('groupName');
-            $table->string('courseID')->nullable();           
+            $table->string('courseID')->nullable()->default(null);           
             $table->date('createdOn')->default(date('Y-m-d H:i:s'));            
         });
     }

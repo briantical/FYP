@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->collation = 'utf8_unicode_ci';            
             $table->string('courseID')->primary();
             $table->year('courseYear')->default(date("Y"));
-            $table->string('coordinatorID')->nullabe();                        
+            $table->string('coordinatorID')->nullabe()->default(null);                        
         });
 
         //Artisan::call( 'db:seed', [

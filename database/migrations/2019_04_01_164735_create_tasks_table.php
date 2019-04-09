@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->string('taskID')->primary();
             $table->string('taskName');
             $table->string('taskDescription');            
-            $table->string('supervisorID')->nullable();                            
+            $table->string('supervisorID')->nullable()->default(null);                            
             $table->date('taskStartDate')->default(date('Y-m-d H:i:s'));
             $table->date('taskEndDate');
             $table->boolean('isComplete')->default(false);

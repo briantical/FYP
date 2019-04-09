@@ -28,7 +28,7 @@ class CreateSupervisorsTable extends Migration
             $table->string('lecturerID')->unique();
             $table->string('lecturerDescription');
             $table->string('supervisorID')->primary();                               
-            $table->string('deptID')->nullable();            
+            $table->string('deptID')->nullable()->default(null);            
             $table->boolean('isCoordinator')->default(false);
             $table->boolean('isSupervisor')->default(false);
             $table->boolean('isPanelist')->default(false);            
