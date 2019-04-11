@@ -19,7 +19,8 @@ class CreatePanelsTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id')->unsigned();        
             $table->string('projectID')->nullable()->default(null);            
-            $table->string('panelistID')->nullable()->default(null);            
+            $table->string('panelistID')->nullable()->default(null); 
+            $table->softDeletes();           
             $table->timestamps();
         });
     }

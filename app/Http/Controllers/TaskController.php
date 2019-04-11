@@ -127,7 +127,7 @@ class TaskController extends Controller
 
     public function getAllProjectswithTasks($id)
     {
-        $projects = Task::($id)->projects();        
+        $projects = Task::find($id)->projects();        
 
         return response()->json(['message'=>'Successfully deleted projects', 'projects'=>$projects]);
     }
