@@ -126,3 +126,49 @@ Route::group([
     Route::get('/course/{studentNumber}', 'StudentController@getStudentCourse');
     Route::get('/group/{studentNumber}', 'StudentController@getStudentGroup');     
 });
+
+Route::group([    
+    'prefix' => 'task',     
+], function () {        
+    Route::get('/', 'TaskController@index');
+    Route::post('/', 'TaskController@store');
+    Route::get('/{taskID}', 'TaskController@show'); 
+    Route::post('/{taskID}', 'TaskController@update');   
+    Route::delete('/{taskID}', 'TaskController@destroy');
+    Route::get('/projects/{taskID}', 'TaskController@getAllProjectswithTasks');
+    Route::get('/supervisor/{taskID}', 'TaskController@getTaskAssignee');     
+});
+
+Route::group([    
+    'prefix' => 'project',     
+], function () {        
+    Route::get('/', 'ProjectController@index');
+    Route::post('/', 'ProjectController@store');
+    Route::get('/{projectID}', 'ProjectController@show'); 
+    Route::post('/{projectID}', 'ProjectController@update');   
+    Route::delete('/{projectID}', 'ProjectController@destroy');
+    Route::get('/tasks/{projectID}', 'ProjectController@getProjectTasks');
+    Route::get('/panelists/{projectID}', 'ProjectController@getProjectPanelists'); 
+    Route::get('/group/{projectID}', 'ProjectController@getProjectGroup');     
+    Route::get('/supervisor/{projectID}', 'ProjectController@getProjectSupervisor');         
+});
+
+Route::group([    
+    'prefix' => 'panel',     
+], function () {        
+    Route::get('/', 'PanelController@index');
+    Route::post('/', 'PanelController@store');
+    Route::get('/{id}', 'PanelController@show'); 
+    Route::post('/{id}', 'PanelController@update');   
+    Route::delete('/{id}', 'PanelController@destroy');        
+});
+
+Route::group([    
+    'prefix' => 'assignment',     
+], function () {        
+    Route::get('/', 'AssignmentController@index');
+    Route::post('/', 'AssignmentController@store');
+    Route::get('/{id}', 'AssignmentController@show'); 
+    Route::post('/{id}', 'AssignmentController@update');   
+    Route::delete('/{id}', 'AssignmentController@destroy');        
+});

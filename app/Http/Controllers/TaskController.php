@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
 
 class TaskController extends Controller
 {
@@ -11,9 +12,14 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
-        //
+        $tasks = \App\Task::all();
+
+        return response()->json([
+            'message' => 'Successfully retrieved all tasks!',
+            'tasks'=>$tasks
+        ], 201);
     }
 
     /**
@@ -34,7 +40,29 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+          'taskID'=>'required',
+          'taskName' => 'required',
+          'taskDescription' => 'required',
+          'supervisorID' => 'required',
+          'taskStartDate' => 'required',
+          'taskEndDate' => 'required',
+          'isComplete' => 'required',
+          'isStarted' => 'required',
+        ]);
+
+        $task = Task::create([
+          'taskID'=>$validatedData['taskID'],
+          'taskName' => $validatedData['taskName'],
+          'taskDescription' => $validatedData['taskDescription'],
+          'supervisorID'=>$validatedData['supervisorID'],
+          'taskStartDate' => $validatedData['taskStartDate'],
+          'taskEndDate' => $validatedData['taskEndDate'],
+          'isComplete' => $validatedData['isComplete'],
+          'isStarted' => $validatedData['isStarted'],
+        ]);
+
+        return response()->json(['message'=>'Task created!']);
     }
 
     /**
@@ -45,7 +73,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::find($id);
+        return $task->toJson();
     }
 
     /**
@@ -68,7 +97,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::find($id);
+        $task->taskID = $request->get('taskID');
+        $task->taskName = $request->get('taskName');
+        $task->taskDescription = $request->get('taskDescription');
+        $task->supervisorID = $request->get('supervisorID');
+        $task->taskStartDate = $request->get('taskStartDate');
+        $task->taskEndDate = $request->get('taskEndDate');
+        $task->isComplete = $request->get('isComplete');
+        $task->isStarted = $request->get('isStarted');
+        $task->save();
+
+        return response()->json(['message'=>'Successfully updated task']);
     }
 
     /**
@@ -79,6 +119,23 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+
+        return response()->json(['message'=>'Successfully deleted task']);
+    }
+
+    public function getAllProjectswithTasks($id)
+    {
+        $projects = Task::($id)->projects();        
+
+        return response()->json(['message'=>'Successfully deleted projects', 'projects'=>$projects]);
+    }
+
+    public function getTaskAssignee($id)
+    {
+        $supervisor = Task::find($id)->supervisor();        
+
+        return response()->json(['message'=>'Successfully deleted supervisors', 'supervisor'=>$supervisor]);
     }
 }

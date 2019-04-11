@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Panel;
 
 class PanelController extends Controller
 {
@@ -11,9 +12,14 @@ class PanelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
-        //
+        $panels = \App\Panel::all();
+
+        return response()->json([
+            'message' => 'Successfully retrieved all panels!',
+            'panels'=>$panels
+        ], 201);
     }
 
     /**
@@ -34,7 +40,17 @@ class PanelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+          'projectID'=>'required',
+          'panelistID' => 'required',                
+        ]);
+
+        $panel = Panel::create([
+          'projectID'=>$validatedData['projectID'],
+          'panelistID' => $validatedData['panelistID'],          
+        ]);
+
+        return response()->json(['message'=>'Panel created!']);
     }
 
     /**
@@ -45,7 +61,8 @@ class PanelController extends Controller
      */
     public function show($id)
     {
-        //
+        $panel = Panel::find($id);
+        return $panel->toJson();
     }
 
     /**
@@ -68,7 +85,12 @@ class PanelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $panel = Panel::find($id);
+        $panel->projectID = $request->get('projectID');
+        $panel->panelistID = $request->get('panelistID');        
+        $panel->save();
+
+        return response()->json(['message'=>'Successfully updated Panel']);
     }
 
     /**
@@ -79,6 +101,9 @@ class PanelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $panel = Panel::find($id);
+        $panel->delete();
+
+        return response()->json(['message'=>'Successfully deleted panel']);
     }
 }

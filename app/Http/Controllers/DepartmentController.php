@@ -112,19 +112,19 @@ class DepartmentController extends Controller
 
     public function getDepartmentSupervisors($id)
     {        
-        $departments = Department::find($id)->supervisors();
-        return response()->json(['message'=>'Successfully obtained supervisors','Supervisors'=> $departments]);        
+        $supervisors = Department::find($id)->supervisors();
+        return response()->json(['message'=>'Successfully obtained supervisors','supervisors'=> $supervisors]);        
     }
 
     public function getDepartmentCoordinators($id)
     {        
-        $departments = Department::find($id)->coordinators();
-        return response()->json(['message'=>'Successfully obtained coordinators','Coordinators'=> $departments]);        
+        $coordinators = Department::find($id)->coordinators();
+        return response()->json(['message'=>'Successfully obtained coordinators','coordinators'=> $coordinators]);        
     }
 
     public function getDepartmentPanelists($id)
     {        
-        $departments = Department::find($id)->panelists();
-        return response()->json(['message'=>'Successfully obtained panelists','Panelists'=> $departments]);        
+        $panelists = Department::find($id)->panelists();
+        return response()->json(['message'=>'Successfully obtained panelists','Panelists'=> $panelists]);        
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Assignment;
 
 class AssignmentController extends Controller
 {
@@ -13,7 +14,12 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        //
+        $assignments = \App\Assignment::all();
+
+        return response()->json([
+            'message' => 'Successfully retrieved all assignments!',
+            'assignments'=>$assignments
+        ], 201);
     }
 
     /**
@@ -34,7 +40,17 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+          'taskID'=>'required',
+          'supervisorID' => 'required',                
+        ]);
+
+        $panel = Assignment::create([
+          'taskID'=>$validatedData['taskID'],
+          'supervisorID' => $validatedData['supervisorID'],          
+        ]);
+
+        return response()->json(['message'=>'Assignment created!']);
     }
 
     /**
@@ -45,7 +61,8 @@ class AssignmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $assignment = Assignment::find($id);
+        return $assignment->toJson();
     }
 
     /**
@@ -68,7 +85,12 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $assignment = Assignment::find($id);
+        $assignment->taskID = $request->get('taskID');
+        $assignment->supervisorID = $request->get('supervisorID');        
+        $assignment->save();
+
+        return response()->json(['message'=>'Successfully updated supervisor']);
     }
 
     /**
@@ -79,6 +101,9 @@ class AssignmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $assignment = Panel::find($id);
+        $assignment->delete();
+
+        return response()->json(['message'=>'Successfully deleted assignment']);
     }
 }

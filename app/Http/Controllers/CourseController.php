@@ -119,12 +119,12 @@ class CourseController extends Controller
     public function getCourseGroups($id)
     {        
         $groups = Course::find($id)->groups();
-        return response()->json(['message'=>'Successfully obtained groups','Groups'=> $groups]);        
+        return response()->json(['message'=>'Successfully obtained groups','groups'=> $groups]);        
     }
 
     public function getCourseStudents($id)
     {        
         $students = Course::find($id)->students();
-        return response()->json(['message'=>'Successfully obtained students','Students'=> $students]);        
+        return response()->json(['message'=>'Successfully obtained students','students'=> $students]);        
     }
 }

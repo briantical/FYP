@@ -19,7 +19,7 @@ class CoordinatorController extends Controller
 
         return response()->json([
             'message' => 'Successfully retrieved all Coordinators!',
-            'Coordinators'=>$coordinators
+            'coordinators'=>$coordinators
         ], 201);
     }
 
@@ -70,7 +70,7 @@ class CoordinatorController extends Controller
            'email_verified_at' => $user->email_verified_at
         ]);
 
-        return response()->json(['message'=>'Coordinator created!','Coordinator'=>$coordinator]);
+        return response()->json(['message'=>'Coordinator created!','coordinator'=>$coordinator]);
     }
 
     /**
@@ -153,6 +153,6 @@ class CoordinatorController extends Controller
     {
         $course = Coordinator::find($id)->course();
        
-        return response()->json(['message'=>'Successfully obtained Coordinator course', 'Course' =>$course]);
+        return response()->json(['message'=>'Successfully obtained Coordinator course', 'course' =>$course]);
     }
 }

@@ -96,7 +96,7 @@ class GroupController extends Controller
         $group->createdOn = $request->get('createdOn');
         $group->save();
 
-        return response()->json(['message'=>'Successfully updated course']);
+        return response()->json(['message'=>'Successfully updated group']);
     }
 
     /**

@@ -18,7 +18,7 @@ class PanelistController extends Controller
 
         return response()->json([
             'message' => 'Successfully retrieved all Panelists!',
-            'Panelists'=>$panelists
+            'panelists'=>$panelists
         ], 201);
     }
 
@@ -153,7 +153,7 @@ class PanelistController extends Controller
     {
         $projects = Panelist::find($id)->projects();
         
-        return response()->json(['message'=>'Successfully retrieved Projects','Projects'=> $projects]);
+        return response()->json(['message'=>'Successfully retrieved Projects','psrojects'=> $projects]);
     }
 
 }
