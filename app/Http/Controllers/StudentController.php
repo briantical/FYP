@@ -113,19 +113,19 @@ class StudentController extends Controller
 
         $student = Student::find($id);
         $user = User::find($request->get($validatedData['userID']));
-           $student->name => $user->name,
-           $student->email=> $user->email, 
-           $student->password => $user->password, 
-           $student->active=> $user->active, 
-           $student->activation_token=> $user->activation_token, 
-           $student->avatar=> $user->avatar, 
-           $student->userID=> $user->userID, 
-           $student->studentNumber=>$id, 
-           $student->registrationNumber=> $validatedData['registrationNumber',           
-           $student->courseID=> $validatedData['courseID'],
-           $student->groupID=> $validatedData['groupID'],            
-           $student->remember_token =>$user->remember_token,
-           $student->email_verified_at=> $user->email_verified_at
+           $student->name =$user->name;
+           $student->email= $user->email; 
+           $student->password = $user->password; 
+           $student->active=$user->active; 
+           $student->activation_token=$user->activation_token;
+           $student->avatar=$user->avatar;
+           $student->userID=$user->userID; 
+           $student->studentNumber=$id; 
+           $student->registrationNumber=$validatedData['registrationNumber'];           
+           $student->courseID=$validatedData['courseID'];
+           $student->groupID= $validatedData['groupID'];            
+           $student->remember_token =$user->remember_token;
+           $student->email_verified_at= $user->email_verified_at;
         $student->save();
 
         return response()->json(['message'=>'Successfully updated student']);

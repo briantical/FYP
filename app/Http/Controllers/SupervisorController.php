@@ -17,7 +17,7 @@ class SupervisorController extends Controller
         $supervisors = Supervisor::all();
 
         return response()->json([
-            'message' => 'Successfully retrieved all Panelists!',
+            'message' => 'Successfully retrieved all Supervisors!',
             'Supervisors'=>$supervisors
         ], 201);
     }
@@ -113,22 +113,22 @@ class SupervisorController extends Controller
 
         $supervisor = Supervisor::find($id);
         $user = User::find($request->get($validatedData['userID']));
-           $supervisor->name => $user->name,
-           $supervisor->email=> $user->email, 
-           $supervisor->password => $user->password, 
-           $supervisor->active=> $user->active, 
-           $supervisor->activation_token=> $user->activation_token, 
-           $supervisor->avatar=> $user->avatar, 
-           $supervisor->userID=> $user->userID, 
-           $supervisor->lectureID=> $validatedData['lectureID'], 
-           $supervisor->lectureDescription=> $validatedData['lectureDescription'
-           $supervisor->supervisorID=>$id, 
-           $supervisor->deptID=> $validatedData['deptID'], 
-           $supervisor->isCoordinator=> false,
-           $supervisor->isSupervisor=> true,
-           $supervisor->isPanelist=> false,
-           $supervisor->remember_token =>$user->remember_token,
-           $supervisor->email_verified_at=> $user->email_verified_at
+           $supervisor->name = $user->name;
+           $supervisor->email= $user->email;
+           $supervisor->password = $user->password;
+           $supervisor->active= $user->active;
+           $supervisor->activation_token= $user->activation_token;
+           $supervisor->avatar= $user->avatar;
+           $supervisor->userID= $user->userID;
+           $supervisor->lectureID= $validatedData['lectureID'];
+           $supervisor->lectureDescription= $validatedData['lectureDescription'];
+           $supervisor->supervisorID=$id; 
+           $supervisor->deptID= $validatedData['deptID']; 
+           $supervisor->isCoordinator= false;
+           $supervisor->isSupervisor= true;
+           $supervisor->isPanelist= false;
+           $supervisor->remember_token = $user->remember_token;
+           $supervisor->email_verified_at =$user->email_verified_at;
         $supervisor->save();
 
         return response()->json(['message'=>'Successfully updated Supervisor']);

@@ -114,22 +114,22 @@ class CoordinatorController extends Controller
 
         $coordinator = Coordinator::find($id);
         $user = User::find($request->get($validatedData['userID']));
-           $coordinator->name => $user->name,
-           $coordinator->email=> $user->email, 
-           $coordinator->password => $user->password, 
-           $coordinator->active=> $user->active, 
-           $coordinator->activation_token=> $user->activation_token, 
-           $coordinator->avatar=> $user->avatar, 
-           $coordinator->userID=> $user->userID, 
-           $coordinator->lectureID=> $validatedData['lectureID'], 
-           $coordinator->lectureDescription=> $validatedData['lectureDescription'], 
-           $coordinator->coordinatorID=> $id, 
-           $coordinator->deptID=> $validatedData['deptID'], 
-           $coordinator->isCoordinator=> true,
-           $coordinator->isSupervisor=> false,
-           $coordinator->isPanelist=> false,
-           $coordinator->remember_token =>$user->remember_token,
-           $coordinator->email_verified_at=> $user->email_verified_at
+           $coordinator->name = $user->name;
+           $coordinator->email= $user->email;
+           $coordinator->password = $user->password; 
+           $coordinator->active= $user->active; 
+           $coordinator->activation_token= $user->activation_token;
+           $coordinator->avatar= $user->avatar;
+           $coordinator->userID= $user->userID; 
+           $coordinator->lectureID= $validatedData['lectureID'];
+           $coordinator->lectureDescription= $validatedData['lectureDescription']; 
+           $coordinator->coordinatorID= $id;
+           $coordinator->deptID= $validatedData['deptID'];
+           $coordinator->isCoordinator= true;
+           $coordinator->isSupervisor= false;
+           $coordinator->isPanelist= false;
+           $coordinator->remember_token =$user->remember_token;
+           $coordinator->email_verified_at= $user->email_verified_a;
         $coordinator->save();
 
         return response()->json(['message'=>'Successfully updated coordinator']);

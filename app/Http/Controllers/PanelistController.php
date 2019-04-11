@@ -114,22 +114,22 @@ class PanelistController extends Controller
 
         $panelist = Panelist::find($id);
         $user = User::find($request->get($validatedData['userID']));
-           $panelist->name => $user->name,
-           $panelist->email=> $user->email, 
-           $panelist->password => $user->password, 
-           $panelist->active=> $user->active, 
-           $panelist->activation_token=> $user->activation_token, 
-           $panelist->avatar=> $user->avatar, 
-           $panelist->userID=> $user->userID, 
-           $panelist->lectureID=> $validatedData['lectureID'], 
-           $panelist->lectureDescription=> $validatedData['lectureDescription'], 
-           $panelist->panelistID=> $id, 
-           $panelist->deptID=> $validatedData['deptID'], 
-           $panelist->isCoordinator=> false,
-           $panelist->isSupervisor=> false,
-           $panelist->isPanelist=> true,
-           $panelist->remember_token =>$user->remember_token,
-           $panelist->email_verified_at=> $user->email_verified_at
+           $panelist->name = $user->name;
+           $panelist->email= $user->email; 
+           $panelist->password = $user->password; 
+           $panelist->active= $user->active; 
+           $panelist->activation_token= $user->activation_token;
+           $panelist->avatar= $user->avatar;
+           $panelist->userID=$user->userID; 
+           $panelist->lectureID=$validatedData['lectureID']; 
+           $panelist->lectureDescription= $validatedData['lectureDescription']; 
+           $panelist->panelistID= $id;
+           $panelist->deptID=$validatedData['deptID'];
+           $panelist->isCoordinator=false;
+           $panelist->isSupervisor=false;
+           $panelist->isPanelist=true;
+           $panelist->remember_token =$user->remember_token;
+           $panelist->email_verified_at= $user->email_verified_at;
         $panelist->save();
 
         return response()->json(['message'=>'Successfully updated Panelist']);
@@ -153,7 +153,7 @@ class PanelistController extends Controller
     {
         $projects = Panelist::find($id)->projects();
         
-        return response()->json(['message'=>'Successfully retrieved Projects','psrojects'=> $projects]);
+        return response()->json(['message'=>'Successfully retrieved Projects','projects'=> $projects]);
     }
 
 }

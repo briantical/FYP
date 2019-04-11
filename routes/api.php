@@ -82,7 +82,7 @@ Route::group([
 });
 
 Route::group([    
-    'prefix' => 'coordinator',     
+    'prefix' => 'coordinator',      
 ], function () {        
     Route::get('/', 'CoordinatorController@index');
     Route::post('/', 'CoordinatorController@store');
@@ -95,13 +95,13 @@ Route::group([
 Route::group([    
     'prefix' => 'supervisor',     
 ], function () {        
-    Route::get('/', 'supervisorController@index');
-    Route::post('/', 'supervisorController@store');
-    Route::get('/{supervisorID}', 'supervisorController@show');
-    Route::post('/{supervisorID}', 'supervisorController@update');  
-    Route::delete('/{supervisorID}', 'supervisorController@destroy');
-    Route::get('/projects/{supervisorID}', 'supervisorController@getAllProjects');
-    Route::get('/tasks/{supervisorID}', 'supervisorController@getAllTasks');    
+    Route::get('/', 'SupervisorController@index');
+    Route::post('/', 'SupervisorController@store');
+    Route::get('/{supervisorID}', 'SupervisorController@show');
+    Route::post('/{supervisorID}', 'SupervisorController@update');  
+    Route::delete('/{supervisorID}', 'SupervisorController@destroy');
+    Route::get('/projects/{supervisorID}', 'SupervisorController@getAllProjects');
+    Route::get('/tasks/{supervisorID}', 'SupervisorController@getAllTasks');    
 });
 
 Route::group([    
