@@ -45,7 +45,7 @@ Route::group([
 Route::group([    
     'prefix' => 'dept',     
 ], function () {        
-    Route::get('/', 'DepartmentController@index');
+    Route::get('/', 'DepartmentController@index'); 
     Route::post('/', 'DepartmentController@store');
     Route::get('/{deptID}', 'DepartmentController@show');
     Route::post('/{deptID}', 'DepartmentController@update');    

@@ -14,11 +14,11 @@ class CourseTableSeeder extends Seeder
     {
         DB::table('course')->delete();
 	    $courses = [
-	    	['courseID'=>'BITE', 'courseYear'=>date("Y"), 'coordinatorID'=>'null'],
-	    	['courseID'=>'BCS', 'courseYear'=>date("Y"), 'coordinatorID'=>'null'],
-	    	['courseID'=>'BSW', 'courseYear'=>date("Y"), 'coordinatorID'=>'null'],
-	    	['courseID'=>'BIS', 'courseYear'=>date("Y"), 'coordinatorID'=>'null'],
-	    	['courseID'=>'BIST', 'courseYear'=>date("Y"), 'coordinatorID'=>'null'],
+	    	['courseID'=>'BITE', 'courseYear'=>date("Y")],
+	    	['courseID'=>'BCS', 'courseYear'=>date("Y")],
+	    	['courseID'=>'BSW', 'courseYear'=>date("Y")],
+	    	['courseID'=>'BIS', 'courseYear'=>date("Y")],
+	    	['courseID'=>'BIST', 'courseYear'=>date("Y")],
 	    ];
 	    Course::insert($courses);
     }

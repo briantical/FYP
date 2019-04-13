@@ -19,13 +19,15 @@ class CreateCoursesTable extends Migration
             $table->collation = 'utf8_unicode_ci';            
             $table->string('courseID')->primary();
             $table->year('courseYear')->default(date("Y"));
-            $table->string('coordinatorID')->nullabe()->default(null);                        
+            $table->string('coordinatorID')->nullable()->default(null); 
+            $table->timestamps();
+            $table->softDeletes();                       
         });
 
-        //Artisan::call( 'db:seed', [
-           // '--class' => 'CourseTableSeeder',
-            //'--force' => true ]
-         //);
+        Artisan::call( 'db:seed', [
+            '--class' => 'CourseTableSeeder',
+            '--force' => true ]
+        );
     }
 
     /**
@@ -36,9 +38,9 @@ class CreateCoursesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('course');
-        //Artisan::call( 'db:seed', [
-        //    '--class' => 'CourseTableSeeder',
-        //    '--force' => true ]
-        //);
+        Artisan::call( 'db:seed', [
+            '--class' => 'CourseTableSeeder',
+            '--force' => true ]
+        );
     }
 }
