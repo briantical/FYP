@@ -115,19 +115,19 @@ class GroupController extends Controller
 
     public function getGroupStudents($id)
     {        
-        $students = Group::find($id)->students();
+        $students = Group::find($id)->students;
         return response()->json(['message'=>'Successfully obtained students','Students'=> $students]);        
     }
 
     public function getGroupProject($id)
     {        
-        $project = Group::find($id)->project();
+        $project = Group::find($id)->project;
         return response()->json(['message'=>'Successfully obtained group project','Project'=> $project]);        
     }
 
     public function getGroupCourse($id)
     {        
-        $course = Group::find($id)->course();
+        $course = Group::find($id)->course;
         return response()->json(['message'=>'Successfully obtained group course','Course'=> $course]);        
     }
 }

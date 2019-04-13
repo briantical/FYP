@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Student;
 use App\User;
+use Avatar;
+use Storage;
 
 class StudentController extends Controller
 {
@@ -49,7 +51,7 @@ class StudentController extends Controller
            'groupID'=> 'required',                            
         ]);
 
-        $user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
 
         $student = Student::create([
            'name' => $user->name,
@@ -58,7 +60,7 @@ class StudentController extends Controller
            'active'=> $user->active, 
            'activation_token'=> $user->activation_token, 
            'avatar'=> $user->avatar, 
-           'userID'=> $user->userID, 
+           'userID'=> $user->id, 
            'studentNumber'=> $validatedData['studentNumber'], 
            'registrationNumber'=> $validatedData['registrationNumber'], 
            'courseID'=> $validatedData['courseID'], 
@@ -112,14 +114,14 @@ class StudentController extends Controller
         ]);
 
         $student = Student::find($id);
-        $user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
            $student->name =$user->name;
            $student->email= $user->email; 
            $student->password = $user->password; 
            $student->active=$user->active; 
            $student->activation_token=$user->activation_token;
            $student->avatar=$user->avatar;
-           $student->userID=$user->userID; 
+           $student->userID=$user->id; 
            $student->studentNumber=$id; 
            $student->registrationNumber=$validatedData['registrationNumber'];           
            $student->courseID=$validatedData['courseID'];
@@ -147,14 +149,14 @@ class StudentController extends Controller
 
     public function getStudentCourse($id)
     {
-        $course = Student::find($id)->course();
+        $course = Student::find($id)->course;
         
         return response()->json(['message'=>'Successfully retrieved Student course', 'Course'=>$course]);
     }
 
     public function getStudentGroup($id)
     {
-        $group = Student::find($id)->course();
+        $group = Student::find($id)->group;
         
         return response()->json(['message'=>'Successfully retrieved Student group', 'Group'=>$group]);
     }

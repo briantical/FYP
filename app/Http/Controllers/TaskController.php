@@ -127,14 +127,14 @@ class TaskController extends Controller
 
     public function getAllProjectswithTasks($id)
     {
-        $projects = Task::find($id)->projects();        
+        $projects = Task::find($id)->projects;        
 
         return response()->json(['message'=>'Successfully deleted projects', 'projects'=>$projects]);
     }
 
     public function getTaskAssignee($id)
     {
-        $supervisor = Task::find($id)->supervisor();        
+        $supervisor = Task::find($id)->supervisor;        
 
         return response()->json(['message'=>'Successfully deleted supervisors', 'supervisor'=>$supervisor]);
     }

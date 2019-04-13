@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Supervisor;
+use Avatar;
+use Storage;
 
 class SupervisorController extends Controller
 {
@@ -42,34 +44,40 @@ class SupervisorController extends Controller
     {
         $validatedData = $request->validate([
            'userID'=> 'required'         ,
-           'lectureID'=> 'required', 
-           'lectureDescription'=> 'required', 
+           'lecturerID'=> 'required', 
+           'lecturerDescription'=> 'required', 
            'supervisorID'=> 'required', 
            'deptID'=> 'required',                               
         ]);
 
-        $user = User::find($request->get($validatedData['userID']));
+        //$user = User::find($request->get($validatedData['userID']));
+        $user = Panelist::find($id)->user();
+        if($user !== null){
+          $supervisor = Supervisor::create([
+            'name' => $user->name,
+             'email'=> $user->email, 
+             'password' => $user->password, 
+             'active'=> $user->active, 
+             'activation_token'=> $user->activation_token, 
+             'avatar'=> $user->avatar, 
+             'userID'=> $user->id, 
+             'lecturerID'=> $validatedData['lectureID'], 
+             'lecturerDescription'=> $validatedData['lectureDescription'], 
+             'supervisorID'=> $validatedData['supervisorID'], 
+             'deptID'=> $validatedData['deptID'], 
+             'isCoordinator'=> false,
+             'isSupervisor'=> true,
+             'isPanelist'=> false,
+             'remember_token' =>$user->remember_token,
+             'email_verified_at' => $user->email_verified_at
+          ]);
 
-        $supervisor = Supervisor::create([
-          'name' => $user->name,
-           'email'=> $user->email, 
-           'password' => $user->password, 
-           'active'=> $user->active, 
-           'activation_token'=> $user->activation_token, 
-           'avatar'=> $user->avatar, 
-           'userID'=> $user->userID, 
-           'lectureID'=> $validatedData['lectureID'], 
-           'lectureDescription'=> $validatedData['lectureDescription'], 
-           'supervisorID'=> $validatedData['supervisorID'], 
-           'deptID'=> $validatedData['deptID'], 
-           'isCoordinator'=> false,
-           'isSupervisor'=> true,
-           'isPanelist'=> false,
-           'remember_token' =>$user->remember_token,
-           'email_verified_at' => $user->email_verified_at
-        ]);
+          return response()->json(['message'=>'Supervisor created!']);
+        }
+        else{
+          return response()->json(['message'=>'Supervisor not created!']);
+        }
 
-        return response()->json(['message'=>'Supervisor created!']);
     }
 
     /**
@@ -106,22 +114,23 @@ class SupervisorController extends Controller
     {
         $validatedData = $request->validate([
            'userID'=> 'required'         ,
-           'lectureID'=> 'required', 
-           'lectureDescription'=> 'required',            
+           'lecturerID'=> 'required', 
+           'lecturerDescription'=> 'required',            
            'deptID'=> 'required',                             
         ]);
 
         $supervisor = Supervisor::find($id);
-        $user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
+        //$user = Supervisor::find($id)->user();
            $supervisor->name = $user->name;
            $supervisor->email= $user->email;
            $supervisor->password = $user->password;
            $supervisor->active= $user->active;
            $supervisor->activation_token= $user->activation_token;
            $supervisor->avatar= $user->avatar;
-           $supervisor->userID= $user->userID;
-           $supervisor->lectureID= $validatedData['lectureID'];
-           $supervisor->lectureDescription= $validatedData['lectureDescription'];
+           $supervisor->userID= $user->id;
+           $supervisor->lectureID= $validatedData['lecturerID'];
+           $supervisor->lectureDescription= $validatedData['lecturerDescription'];
            $supervisor->supervisorID=$id; 
            $supervisor->deptID= $validatedData['deptID']; 
            $supervisor->isCoordinator= false;
@@ -151,14 +160,14 @@ class SupervisorController extends Controller
 
     public function getAllProjects($id)
     {
-        $projects = Supervisor::find($id)->projects();
+        $projects = Supervisor::find($id)->projects;
         
         return response()->json(['message'=>'Successfully retrieved Projects','Projects'=> $projects]);
     }
 
     public function getAllTasks($id)
     {
-        $tasks = Supervisor::find($id)->tasks();
+        $tasks = Supervisor::find($id)->tasks;
         
         return response()->json(['message'=>'Successfully retrieved Tasks','Tasks'=> $tasks]);
     }

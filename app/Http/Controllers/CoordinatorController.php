@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Coordinator;
 use App\User;
+use Avatar;
+use Storage;
 
 class CoordinatorController extends Controller 
 {
@@ -49,18 +51,19 @@ class CoordinatorController extends Controller
            'deptID'=> 'required',                           
         ]);
 
-        $user = User::find($request->get($validatedData['userID']));
-
-        $coordinator = Coordinator::create([
-          'name' => $user->name,
+        $user = User::find($validatedData['userID']);
+        //$user = Coordinator::find($id)->user();
+        if($user !== null){
+          $coordinator = Coordinator::create([
+           'name' => $user->name,
            'email'=> $user->email, 
            'password' => $user->password, 
            'active'=> $user->active, 
            'activation_token'=> $user->activation_token, 
            'avatar'=> $user->avatar, 
-           'userID'=> $user->userID, 
-           'lectureID'=> $validatedData['lectureID'], 
-           'lectureDescription'=> $validatedData['lectureDescription'], 
+           'userID'=> $user->id, 
+           'lecturerID'=> $validatedData['lectureID'], 
+           'lecturerDescription'=> $validatedData['lectureDescription'], 
            'coordinatorID'=> $validatedData['coordinatorID'], 
            'deptID'=> $validatedData['deptID'], 
            'isCoordinator'=> true,
@@ -71,6 +74,11 @@ class CoordinatorController extends Controller
         ]);
 
         return response()->json(['message'=>'Coordinator created!','coordinator'=>$coordinator]);
+        }
+        else{
+          return response()->json(['message'=>'Coordinator not created!']);
+        }          
+        
     }
 
     /**
@@ -107,22 +115,23 @@ class CoordinatorController extends Controller
     {   
         $validatedData = $request->validate([
            'userID'=> 'required'         ,
-           'lectureID'=> 'required', 
-           'lectureDescription'=> 'required',            
+           'lecturerID'=> 'required', 
+           'lecturerDescription'=> 'required',            
            'deptID'=> 'required',                                   
         ]);
 
         $coordinator = Coordinator::find($id);
-        $user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
+        //$user = Coordinator::find($id)->user();
            $coordinator->name = $user->name;
            $coordinator->email= $user->email;
            $coordinator->password = $user->password; 
            $coordinator->active= $user->active; 
            $coordinator->activation_token= $user->activation_token;
            $coordinator->avatar= $user->avatar;
-           $coordinator->userID= $user->userID; 
-           $coordinator->lectureID= $validatedData['lectureID'];
-           $coordinator->lectureDescription= $validatedData['lectureDescription']; 
+           $coordinator->userID= $user->id; 
+           $coordinator->lecturerID= $validatedData['lecturerID'];
+           $coordinator->lecturerDescription= $validatedData['lecturerDescription']; 
            $coordinator->coordinatorID= $id;
            $coordinator->deptID= $validatedData['deptID'];
            $coordinator->isCoordinator= true;
@@ -151,8 +160,8 @@ class CoordinatorController extends Controller
 
     public function getCourseCoordinated($id)
     {
-        $course = Coordinator::find($id)->course();
-       
+        $course = Coordinator::find($id)->course;
+        //$course = Coordinator::with('course')->get();
         return response()->json(['message'=>'Successfully obtained Coordinator course', 'course' =>$course]);
     }
 }

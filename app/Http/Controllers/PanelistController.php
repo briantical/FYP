@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Panelist;
+use Avatar;
+use Storage;
 
 class PanelistController extends Controller
 {
@@ -42,34 +44,39 @@ class PanelistController extends Controller
     {
         $validatedData = $request->validate([
            'userID'=> 'required'         ,
-           'lectureID'=> 'required', 
-           'lectureDescription'=> 'required', 
+           'lecturerID'=> 'required', 
+           'lecturerDescription'=> 'required', 
            'panelistID'=> 'required', 
            'deptID'=> 'required',                             
         ]);
 
-        $user = User::find($request->get($validatedData['userID']));
+        //$user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
+        if($user !== null){
+          $panelsit = Panelist::create([
+            'name' => $user->name,
+             'email'=> $user->email, 
+             'password' => $user->password, 
+             'active'=> $user->active, 
+             'activation_token'=> $user->activation_token, 
+             'avatar'=> $user->avatar, 
+             'userID'=> $user->id, 
+             'lecturerID'=> $validatedData['lectureID'], 
+             'lecturerDescription'=> $validatedData['lectureDescription'], 
+             'panelistID'=> $validatedData['panelistID'], 
+             'deptID'=> $validatedData['deptID'], 
+             'isCoordinator'=> false,
+             'isSupervisor'=> false,
+             'isPanelist'=> true,
+             'remember_token' =>$user->remember_token,
+             'email_verified_at' => $user->email_verified_at
+          ]);
 
-        $panelsit = Panelist::create([
-          'name' => $user->name,
-           'email'=> $user->email, 
-           'password' => $user->password, 
-           'active'=> $user->active, 
-           'activation_token'=> $user->activation_token, 
-           'avatar'=> $user->avatar, 
-           'userID'=> $user->userID, 
-           'lectureID'=> $validatedData['lectureID'], 
-           'lectureDescription'=> $validatedData['lectureDescription'], 
-           'panelistID'=> $validatedData['panelistID'], 
-           'deptID'=> $validatedData['deptID'], 
-           'isCoordinator'=> false,
-           'isSupervisor'=> false,
-           'isPanelist'=> true,
-           'remember_token' =>$user->remember_token,
-           'email_verified_at' => $user->email_verified_at
-        ]);
-
-        return response()->json(['message'=>'Panelist created!','panelist'=>$panelist]);
+          return response()->json(['message'=>'Panelist created!','panelist'=>$panelist]);
+        }
+        else{
+          return response()->json(['message'=>'Panelist not created!']);
+        } 
     }
 
     /**
@@ -107,22 +114,23 @@ class PanelistController extends Controller
         
         $validatedData = $request->validate([
            'userID'=> 'required'         ,
-           'lectureID'=> 'required', 
-           'lectureDescription'=> 'required',            
+           'lecturerID'=> 'required', 
+           'lecturerDescription'=> 'required',            
            'deptID'=> 'required',                             
         ]);
 
         $panelist = Panelist::find($id);
-        $user = User::find($request->get($validatedData['userID']));
+        $user = User::find($validatedData['userID']);
+        //$user = Panelist::find($id)->user();
            $panelist->name = $user->name;
            $panelist->email= $user->email; 
            $panelist->password = $user->password; 
            $panelist->active= $user->active; 
            $panelist->activation_token= $user->activation_token;
            $panelist->avatar= $user->avatar;
-           $panelist->userID=$user->userID; 
-           $panelist->lectureID=$validatedData['lectureID']; 
-           $panelist->lectureDescription= $validatedData['lectureDescription']; 
+           $panelist->userID=$user->id; 
+           $panelist->lectureID=$validatedData['lecturerID']; 
+           $panelist->lectureDescription= $validatedData['lecturerDescription']; 
            $panelist->panelistID= $id;
            $panelist->deptID=$validatedData['deptID'];
            $panelist->isCoordinator=false;
@@ -151,7 +159,7 @@ class PanelistController extends Controller
 
     public function getAllProjects($id)
     {
-        $projects = Panelist::find($id)->projects();
+        $projects = Panelist::find($id)->projects;
         
         return response()->json(['message'=>'Successfully retrieved Projects','projects'=> $projects]);
     }

@@ -56,7 +56,7 @@ Route::group([
 });
 
 Route::group([    
-    'prefix' => 'course',     
+    'prefix' => 'course',      
 ], function () {        
     Route::get('/', 'CourseController@index');
     Route::post('/', 'CourseController@store');

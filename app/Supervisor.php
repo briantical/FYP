@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
 
+use Avatar;
+use Storage;
+
 class Supervisor extends Authenticatable
 {
     protected $table = 'supervisor';
@@ -19,7 +22,7 @@ class Supervisor extends Authenticatable
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 'email', 'password', 'active', 'activation_token', 'avatar', 'userID', 'lectureID', 'lectureDescription', 'supervisorID', 'deptID', 'isCoordinator','isSupervisor','isPanelist'
+        'name', 'email', 'password', 'active', 'activation_token', 'avatar', 'userID', 'lecturerID', 'lecturerDescription', 'supervisorID', 'deptID', 'isCoordinator','isSupervisor','isPanelist'
     ];
     protected $hidden = [
         'password', 'remember_token', 'activation_token'

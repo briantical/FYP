@@ -130,28 +130,28 @@ class ProjectController extends Controller
 
     public function getProjectTasks($id)
     {
-        $tasks = Project::find($id)->tasks();
+        $tasks = Project::find($id)->tasks;
         
         return response()->json(['message'=>'Successfully retrieved tasks', 'tasks' => $tasks]);
     }
 
     public function getProjectPanelists($id)
     {
-        $panelists = Project::find($id)->panelists();
+        $panelists = Project::find($id)->panelists;
         
         return response()->json(['message'=>'Successfully retrieved panelists', 'panelists' => $panelists]);
     }
 
     public function getProjectGroup($id)
     {
-        $group = Project::find($id)->group();
+        $group = Project::find($id)->group;
         
         return response()->json(['message'=>'Successfully retrieved group', 'group' => $group]);
     }
 
     public function getProjectSupervisor($id)
     {
-        $supervisor = Project::find($id)->supervisor();
+        $supervisor = Project::find($id)->supervisor;
         
         return response()->json(['message'=>'Successfully retrieved supervisor', 'supervisor' => $supervisor]);
     }

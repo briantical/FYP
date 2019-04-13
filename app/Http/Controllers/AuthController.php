@@ -38,7 +38,7 @@ class AuthController extends Controller
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
         $user->notify(new SignupActivate($user));
         return response()->json([
-            'message' => 'Successfully created user!'
+            'message' => 'Check your email to confirm account'
         ], 201);
     }
   
