@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Panelist;
+use App\User;
 use Avatar;
 use Storage;
 
@@ -53,16 +54,16 @@ class PanelistController extends Controller
         //$user = User::find($request->get($validatedData['userID']));
         $user = User::find($validatedData['userID']);
         if($user !== null){
-          $panelsit = Panelist::create([
-            'name' => $user->name,
+          $panelist = Panelist::create([
+             'name' => $user->name,
              'email'=> $user->email, 
              'password' => $user->password, 
              'active'=> $user->active, 
              'activation_token'=> $user->activation_token, 
              'avatar'=> $user->avatar, 
              'userID'=> $user->id, 
-             'lecturerID'=> $validatedData['lectureID'], 
-             'lecturerDescription'=> $validatedData['lectureDescription'], 
+             'lecturerID'=> $validatedData['lecturerID'], 
+             'lecturerDescription'=> $validatedData['lecturerDescription'], 
              'panelistID'=> $validatedData['panelistID'], 
              'deptID'=> $validatedData['deptID'], 
              'isCoordinator'=> false,

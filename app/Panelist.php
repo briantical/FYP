@@ -13,7 +13,7 @@ use Storage;
 
 class Panelist extends Authenticatable
 {
-    protected $table = 'panel';
+    protected $table = 'panelist';
     protected $primaryKey ="panelistID";
     public $incrementing = false;
     protected $keyType = "string";

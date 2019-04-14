@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Supervisor;
+use App\User;
 use Avatar;
 use Storage;
 
@@ -50,8 +51,8 @@ class SupervisorController extends Controller
            'deptID'=> 'required',                               
         ]);
 
-        //$user = User::find($request->get($validatedData['userID']));
-        $user = Panelist::find($id)->user();
+        $user = User::find($validatedData['userID']);
+        //$user = Supervisor::find($id)->user();
         if($user !== null){
           $supervisor = Supervisor::create([
             'name' => $user->name,
@@ -61,8 +62,8 @@ class SupervisorController extends Controller
              'activation_token'=> $user->activation_token, 
              'avatar'=> $user->avatar, 
              'userID'=> $user->id, 
-             'lecturerID'=> $validatedData['lectureID'], 
-             'lecturerDescription'=> $validatedData['lectureDescription'], 
+             'lecturerID'=> $validatedData['lecturerID'], 
+             'lecturerDescription'=> $validatedData['lecturerDescription'], 
              'supervisorID'=> $validatedData['supervisorID'], 
              'deptID'=> $validatedData['deptID'], 
              'isCoordinator'=> false,
@@ -129,8 +130,8 @@ class SupervisorController extends Controller
            $supervisor->activation_token= $user->activation_token;
            $supervisor->avatar= $user->avatar;
            $supervisor->userID= $user->id;
-           $supervisor->lectureID= $validatedData['lecturerID'];
-           $supervisor->lectureDescription= $validatedData['lecturerDescription'];
+           $supervisor->lecturerID= $validatedData['lecturerID'];
+           $supervisor->lecturerDescription= $validatedData['lecturerDescription'];
            $supervisor->supervisorID=$id; 
            $supervisor->deptID= $validatedData['deptID']; 
            $supervisor->isCoordinator= false;
@@ -162,13 +163,13 @@ class SupervisorController extends Controller
     {
         $projects = Supervisor::find($id)->projects;
         
-        return response()->json(['message'=>'Successfully retrieved Projects','Projects'=> $projects]);
+        return response()->json(['message'=>'Successfully retrieved Projects','projects'=> $projects]);
     }
 
     public function getAllTasks($id)
     {
         $tasks = Supervisor::find($id)->tasks;
         
-        return response()->json(['message'=>'Successfully retrieved Tasks','Tasks'=> $tasks]);
+        return response()->json(['message'=>'Successfully retrieved Tasks','tasks'=> $tasks]);
     }
 }
